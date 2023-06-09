@@ -1,0 +1,67 @@
+<!-- @php
+use App\Http\Controllers\ListviewController;
+
+$listviewController = new ListviewController();
+$result = $listviewController->split_category($watch);
+
+$col_index_recommend = $result['col_index_recommend'];
+$col_index_new_arrival = $result['col_index_new_arrival'];
+$col_index_bestseller = $result['col_index_bestseller'];
+$col_index_on_sale = $result['col_index_on_sale'];
+@endphp
+  <div id="demo" class="carousel carousel-dark slide carousel-l" data-bs-ride="false">
+    <div class="carousel-indicators carousel-indicators-l">
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
+        <div class="indicator-text">Recommend</div>
+      </button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="1" aria-label="Slide 2">
+        <div class="indicator-text">NewArrivals</div>
+      </button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="2" aria-label="Slide 3">
+        <div class="indicator-text">BestSeller</div>
+      </button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="3" aria-label="Slide 4">
+        <div class="indicator-text">OnSale</div>
+      </button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item carousel-item-l active">
+        <div class="container-fluid">
+
+        @php
+        $listviewController->listview($col_index_recommend, $watch);
+        @endphp
+
+      </div>
+      </div>
+      <div class="carousel-item carousel-item-l">
+      <div class="container-fluid">
+
+      @php
+        $listviewController->listview($col_index_new_arrival, $watch);
+      @endphp
+
+
+      </div>
+      </div>
+
+      <div class="carousel-item carousel-item-l">
+
+          <div class="container-fluid">
+
+          @php
+          $listviewController->listview($col_index_bestseller, $watch);
+          @endphp
+
+          </div>
+      </div>
+      <div class="carousel-item carousel-item-l">
+      <div class="container-fluid">
+        @php
+        $listviewController->listview($col_index_on_sale, $watch);
+        @endphp
+      </div>
+
+    </div>
+
+  </div> -->

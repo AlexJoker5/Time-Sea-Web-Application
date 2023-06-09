@@ -1,0 +1,84 @@
+{"recommend": 1,"new_arrival":1,"bestseller":0,"on_sale":1}
+{"recommend": 0,"new_arrival":1,"bestseller":1,"on_sale":0}
+{"recommend": 1,"new_arrival":0,"bestseller":0,"on_sale":1}
+{"recommend": 0,"new_arrival":0,"bestseller":1,"on_sale":1}
+
+../public/images/b.webp
+
+images/b.webp
+
+@include('carousel.carousel', ['carousel' => $carousel])
+
+@php
+            $row_count = 0;
+            $col_count = 0;
+            $col_index = array();
+          @endphp
+          
+          @foreach ($watch as $key => $info)
+            @php $jsonArray = json_decode($info->category, true); @endphp
+            @if ($jsonArray['recommend'] == 1)
+              @php $col_index[] = $key @endphp
+            @endif
+          @endforeach
+
+          @php
+          $min_row = count($col_index) > 10 ? ceil(count($col_index) / 5) : 2;
+
+          $max_col = $min_row * 5;
+          @endphp
+          
+          @foreach($col_index as $key => $index)
+            @if ($col_count <= 0)
+              <div class="row">
+            @endif
+            
+          
+            <a class="col" href="#">
+              <div class="product-img">
+                <img src="{{asset($watch[$index]->image)}}" alt="">
+              </div>
+              <div class="product-description">
+                <h6 class="companyName">{{$watch[$index]->company}}</h6>
+                <h5 class="watchName">{{$watch[$index]->serialName}}</h5>
+                <h6 class="watchPrice">${{$watch[$index]->price}}</h6>
+              </div>
+            </a>
+
+            @php
+            $max_col -= 1;
+            $col_count += 1; 
+            @endphp
+
+            @if($col_count > 4)
+              @php 
+              $row_count += 1;
+              $col_count = 0;
+              @endphp
+              </div>
+            @endif
+          @endforeach
+          @if ($max_col > 0)
+            @for( $i = 0; $i < $max_col; $i++)
+            @if ($col_count <= 0)
+              <div class="row">
+              <div class="col no-product">
+                Column
+              </div>
+            @else
+              <div class="col no-product">
+                Column
+              </div>
+            @endif 
+            @php
+              $col_count += 1;
+            @endphp
+            @if($col_count > 4)
+              @php
+               $row_count += 1;
+               $col_count = 0; 
+               @endphp
+              </div>
+            @endif
+            @endfor
+          @endif
